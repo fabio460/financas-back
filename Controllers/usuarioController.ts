@@ -25,7 +25,7 @@ export const logarUsuarios = async(req:Request, res:Response)=>{
       if (!r) {
          res.status(401).json("Usuario não autenticado!")
       }else{
-         const token = jwt.sign({usuario:r.nome},privateKey,{expiresIn:60})
+         const token = jwt.sign({usuario:r.nome},privateKey,{expiresIn:60*60})
          res.json({usuario:r,token});
       }
       
