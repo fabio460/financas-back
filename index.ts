@@ -3,7 +3,7 @@ const app = express()
 
 import { routerAll } from "./Routes";
 import { listarUsuarios } from './Controllers/usuarioController';
-
+app.use(express.json())
 routerAll.forEach((e)=>{
     return app.use(e.endpoint,e.router)
 })
