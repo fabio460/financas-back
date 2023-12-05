@@ -15,4 +15,31 @@ model Usuario {
   email String  @unique
   nome  String  
   senha String  
+  mes Mes[]
+}
+
+model Mes {
+    id String @id @default(auto()) @map("_id") @db.ObjectId
+    idDoUsuario String @db.ObjectId
+    usuario Usuario @relation(fields: [idDoUsuario], references: [id], onDelete:Cascade, onUpdate: Cascade)
+    mesReferente String
+    contas_A_Pagar Contas_A_Pagar[]
+    ganhos Ganhos[]
+    sobra Float
+}
+
+model Contas_A_Pagar {
+    id String @id @default(auto()) @map("_id") @db.ObjectId
+    idMes String @db.ObjectId
+    mes Mes @relation(fields: [idMes], references: [id], onDelete:Cascade, onUpdate: Cascade)
+    nome String
+    valor Float
+}
+
+model Ganhos {
+    id String @id @default(auto()) @map("_id") @db.ObjectId
+    idMes String @db.ObjectId
+    mes Mes @relation(fields: [idMes], references: [id], onDelete:Cascade, onUpdate: Cascade)
+    nome String
+    valor Float
 }
