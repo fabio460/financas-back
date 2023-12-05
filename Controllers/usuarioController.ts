@@ -14,6 +14,7 @@ export const logarUsuarios = async(req:Request, res:Response)=>{
    try {
       const r =await prisma.usuario.findUnique({
          select:{
+            id:true,
             email:true,
             nome:true
          },
@@ -25,7 +26,7 @@ export const logarUsuarios = async(req:Request, res:Response)=>{
       if (!r) {
          res.status(401).json("Usuario não autenticado!")
       }else{
-         const token = jwt.sign({usuario:r.nome},privateKey,{expiresIn:60*60})
+         const token = jwt.sign({usuario:r},privateKey,{expiresIn:60*60})
          res.json({usuario:r,token});
       }
       
@@ -38,7 +39,7 @@ export const autenticarUsuarios = async(req:Request, res:Response)=>{
    try {
       const token:any = req.headers["x-access-token"]
       if (jwt.verify(token, privateKey)) {
-         res.status(200).json("autenticado")
+         res.status(200).json({cond:"autenticado", usuario:jwt.decode(token)})
       }else{
          res.json("não")
       }
@@ -59,8 +60,41 @@ export const criarUsuarios = async(req:Request, res:Response)=>{
             senha
          }
       })
-      res.send("usuário criado com sucesso!")
+      res.json("usuário criado com sucesso!")
    } catch (error) {
       res.json({falha:"não criado", motivo:error})
+   }
+}
+
+export const deletarUsuarios = async(req:Request, res:Response)=>{
+   try {
+      const {id} = req.body
+      await prisma.usuario.delete({
+         where:{
+           id
+         }
+      })
+      res.json("usuário deletado com sucesso!")
+   } catch (error) {
+      res.status(500).json({falha:"não deletado", motivo:error})
+   }
+}
+
+export const atualizarUsuarios = async(req:Request, res:Response)=>{
+   try {
+      const {email, nome, senha, id} = req.body
+      await prisma.usuario.update({
+         data:{
+            email,
+            nome,
+            senha
+         },
+         where:{
+            id
+         }
+      })
+      res.json("usuário atualizado com sucesso!")
+   } catch (error) {
+      res.json({falha:"usuário não atualizado", motivo:error})
    }
 }
