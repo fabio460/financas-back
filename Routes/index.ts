@@ -10,3 +10,4 @@ export const routerAll:routerType[] = [
     {endpoint:"/ganhos", router:ganhosRouter},
     {endpoint:"/contasapagar",router:contas_a_pagarRouter}
 ]
+
