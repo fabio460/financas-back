@@ -6,10 +6,12 @@ export const listarMes = async(req:Request, res:Response)=>{
         include:{
             contas_A_Pagar:true,
             ganhos:true
-        }
+        },
+        
     });
     res.json(m)
 }
+
 
 export const adicionarMes = async(req:Request, res:Response)=>{
     try {
