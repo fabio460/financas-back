@@ -26,6 +26,7 @@ model Mes {
     contas_A_Pagar Contas_A_Pagar[]
     ganhos Ganhos[]
     sobra Float
+    numero Int?
 }
 
 model Contas_A_Pagar {
