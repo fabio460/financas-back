@@ -9,7 +9,9 @@ export const listarMes = async(req:Request, res:Response)=>{
             ganhos:true
         },
         where:{
-            id
+            usuario:{
+                id
+            }
         }
     });
     res.json(m)
