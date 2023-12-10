@@ -2,12 +2,15 @@ import { prisma } from "../prisma/prismaClient"
 import {Request, Response} from 'express'
 
 export const listarMes = async(req:Request, res:Response)=>{
+    const id = req.params.id
     const m = await prisma.mes.findMany({
         include:{
             contas_A_Pagar:true,
             ganhos:true
         },
-        
+        where:{
+            id
+        }
     });
     res.json(m)
 }
