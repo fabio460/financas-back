@@ -38,9 +38,9 @@ export const deletarGanhos = async(req:Request, res:Response)=>{
 
 export const atualizarGanho = async(req:Request, res:Response)=>{
     try {
-       const {idMes, nome, valor} = req.body
-       await prisma.ganhos.updateMany({
-        where:{idMes},
+       const {id, nome, valor} = req.body
+       await prisma.ganhos.update({
+        where:{id},
         data:{
             nome,
             valor,

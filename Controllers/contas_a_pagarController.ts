@@ -38,9 +38,9 @@ export const deletarContas_A_Pagars = async(req:Request, res:Response)=>{
 
 export const atualizarContas_A_Pagar = async(req:Request, res:Response)=>{
     try {
-       const {idMes, nome, valor} = req.body
-       await prisma.contas_A_Pagar.updateMany({
-        where:{idMes},
+       const {id, nome, valor} = req.body
+       await prisma.contas_A_Pagar.update({
+        where:{id},
         data:{
             nome,
             valor,
