@@ -9,6 +9,19 @@ export const listarUsuarios = async(req:Request, res:Response)=>{
    res.json(r);
 }
 
+export const listarUsuariosPorId = async(req:Request, res:Response)=>{
+   const r =await prisma.usuario.findMany({
+      include:{
+         mes:{
+            include:{
+               contas:true
+            }
+         }
+      }
+   });
+   res.json(r);
+}
+
 export const logarUsuarios = async(req:Request, res:Response)=>{
    const {email, senha} = req.body
    try {

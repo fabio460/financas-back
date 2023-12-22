@@ -25,6 +25,7 @@ model Mes {
     mesReferente String
     contas_A_Pagar Contas_A_Pagar[]
     ganhos Ganhos[]
+    contas Contas[]
     sobra Float
     numero Int?
 }
@@ -43,4 +44,13 @@ model Ganhos {
     mes Mes @relation(fields: [idMes], references: [id], onDelete:Cascade, onUpdate: Cascade)
     nome String
     valor Float
+}
+model Contas {
+    id String @id @default(auto()) @map("_id") @db.ObjectId
+    idMes String @db.ObjectId
+    mes Mes @relation(fields: [idMes], references: [id], onDelete:Cascade, onUpdate: Cascade)
+    nome String
+    valor Float
+    selecionado Boolean
+    tipo String
 }
