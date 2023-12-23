@@ -10,7 +10,11 @@ export const listarUsuarios = async(req:Request, res:Response)=>{
 }
 
 export const listarUsuariosPorId = async(req:Request, res:Response)=>{
-   const r =await prisma.usuario.findMany({
+   const id = req.params.id
+   const r =await prisma.usuario.findUnique({
+      where:{
+         id
+      },
       include:{
          mes:{
             include:{

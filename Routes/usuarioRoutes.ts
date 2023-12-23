@@ -1,8 +1,9 @@
 import { Router } from "express";
-import { logarUsuarios, criarUsuarios, listarUsuarios, autenticarUsuarios, deletarUsuarios, atualizarUsuarios } from "../Controllers/usuarioController";
+import { logarUsuarios, criarUsuarios, listarUsuarios, autenticarUsuarios, deletarUsuarios, atualizarUsuarios, listarUsuariosPorId } from "../Controllers/usuarioController";
 
 const usuarioRouter = Router();
 usuarioRouter.get("/listarUsuario",listarUsuarios)
+usuarioRouter.get("/listarUsuarioPorId/:id", listarUsuariosPorId)
 usuarioRouter.post("/criarUsuario", criarUsuarios)
 usuarioRouter.post("/logarUsuario", logarUsuarios)
 usuarioRouter.get("/autenticaUsuario", autenticarUsuarios)
