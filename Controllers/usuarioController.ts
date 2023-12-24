@@ -11,19 +11,23 @@ export const listarUsuarios = async(req:Request, res:Response)=>{
 
 export const listarUsuariosPorId = async(req:Request, res:Response)=>{
    const id = req.params.id
-   const r =await prisma.usuario.findUnique({
-      where:{
-         id
-      },
-      include:{
-         mes:{
-            include:{
-               contas:true
+   try {      
+      const r =await prisma.usuario.findUnique({
+         where:{
+            id
+         },
+         include:{
+            mes:{
+               include:{
+                  contas:true
+               }
             }
          }
-      }
-   });
-   res.json(r);
+      });
+      res.json(r);
+   } catch (error) {
+      res.status(500).json(error)
+   }
 }
 
 export const logarUsuarios = async(req:Request, res:Response)=>{
@@ -43,12 +47,12 @@ export const logarUsuarios = async(req:Request, res:Response)=>{
       if (!r) {
          res.status(401).json("Usuario não autenticado!")
       }else{
-         const token = jwt.sign({usuario:r},privateKey,{expiresIn:''})
+         const token = jwt.sign({usuario:r},privateKey,{expiresIn:'5d'})
          res.json({usuario:r,token});
       }
       
    } catch (error) {
-      res.json({falha:"falha na autenticação", motivo:error})
+      res.status(500).json({falha:"falha na autenticação", motivo:error})
    }
 }
 

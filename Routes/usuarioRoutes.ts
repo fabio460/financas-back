@@ -3,7 +3,7 @@ import { logarUsuarios, criarUsuarios, listarUsuarios, autenticarUsuarios, delet
 
 const usuarioRouter = Router();
 usuarioRouter.get("/listarUsuario",listarUsuarios)
-usuarioRouter.get("/listarUsuarioPorId/:id", listarUsuariosPorId)
+usuarioRouter.get("/listarUsuario/:id", listarUsuariosPorId)
 usuarioRouter.post("/criarUsuario", criarUsuarios)
 usuarioRouter.post("/logarUsuario", logarUsuarios)
 usuarioRouter.get("/autenticaUsuario", autenticarUsuarios)
