@@ -19,7 +19,11 @@ export const listarUsuariosPorId = async(req:Request, res:Response)=>{
          include:{
             mes:{
                include:{
-                  contas:true
+                  contas:{
+                     orderBy:{
+                        tipo:"asc"
+                     }
+                  }
                }
             }
          }
