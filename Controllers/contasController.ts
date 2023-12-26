@@ -57,3 +57,30 @@ export const atualizarcontas = async(req:Request, res:Response)=>{
        res.json({falha:"contas não atualizado", motivo:error})
     }
 }
+
+export const inverterContaSelecionada = async(req:Request, res:Response)=>{
+    const {id} = req.body
+    try {
+       const conta = await prisma.contas.findUnique({
+        where:id
+       }) 
+       if (conta?.selecionado) {        
+           await prisma.contas.update({
+                where:{id},
+                data:{
+                    selecionado:false
+                }
+           })
+       }else{
+        await prisma.contas.update({
+                where:{id},
+                data:{
+                    selecionado:true
+                }
+            })
+        }
+       res.json("contas atualizado com sucesso!")
+    } catch (error) {
+       res.json({falha:"contas não atualizado", motivo:error})
+    }
+}
