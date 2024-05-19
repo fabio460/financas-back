@@ -53,9 +53,9 @@ export const atualizarMes = async(req:Request, res:Response)=>{
        await prisma.mes.update({
         where:{id},
         data:{
-            idDoUsuario,
-            mesReferente,
-            sobra:0,
+            // idDoUsuario,
+            // mesReferente,
+            // sobra:0,
             Ano
         }
        })
