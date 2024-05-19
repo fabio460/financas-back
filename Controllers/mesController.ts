@@ -20,12 +20,13 @@ export const listarMes = async(req:Request, res:Response)=>{
 
 export const adicionarMes = async(req:Request, res:Response)=>{
     try {
-       const {idDoUsuario, mesReferente} = req.body
+       const {idDoUsuario, mesReferente, Ano} = req.body
        await prisma.mes.create({
         data:{
             idDoUsuario,
             mesReferente,
             sobra:0,
+            Ano
         }
        })
        res.json("Mes criado com sucesso!")
@@ -48,13 +49,14 @@ export const deletarMes = async(req:Request, res:Response)=>{
 
 export const atualizarMes = async(req:Request, res:Response)=>{
     try {
-       const {id, idDoUsuario, mesReferente} = req.body
+       const {id, idDoUsuario, mesReferente, Ano} = req.body
        await prisma.mes.update({
         where:{id},
         data:{
             idDoUsuario,
             mesReferente,
             sobra:0,
+            Ano
         }
        })
        res.json("Mes atualizado com sucesso!")

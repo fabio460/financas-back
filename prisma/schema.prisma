@@ -28,7 +28,9 @@ model Mes {
     contas Contas[]
     sobra Float
     numero Int?
+    Ano Int?
 }
+
 
 model Contas_A_Pagar {
     id String @id @default(auto()) @map("_id") @db.ObjectId
