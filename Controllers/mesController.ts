@@ -12,6 +12,9 @@ export const listarMes = async(req:Request, res:Response)=>{
             usuario:{
                 id
             }
+        },
+        orderBy:{
+            Ano:"asc"
         }
     });
     res.json(m)
