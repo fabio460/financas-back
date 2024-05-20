@@ -18,6 +18,9 @@ export const listarUsuariosPorId = async(req:Request, res:Response)=>{
          },
          include:{
             mes:{
+               orderBy:{
+                  Ano:"asc"
+               },
                include:{
                   contas:{
                      orderBy:{
